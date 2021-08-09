@@ -32,7 +32,8 @@ type measValue struct {
 }
 
 type r struct {
-	Value  float32  `xml:"p,attr"`
+	Key  string  `xml:"p,attr"`
+	Value string `xml:",chardata"`
 }
 
 func main() {
