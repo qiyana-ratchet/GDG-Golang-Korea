@@ -9,11 +9,15 @@ import (
 
 type measInfo struct {
 	XMLName xml.Name `xml:"measInfo"`
-	//Job     string   `xml:"job,attr"`
-	//GranPeriod string `xml:"granPeriod,attr,attr"`
-	//RepPeriod string `xml:"repPeriod,attr"`
-	MeAsType[] measType `xml:"measType,attr"`
-	//MeAsValue[] measValue `xml:"measValue,attr"`
+	Job     job   `xml:"job"`
+/*	GranPeriod string `xml:"granPeriod,attr,attr"`
+	RepPeriod string `xml:"repPeriod,attr"`*/
+	MeAsType[] measType `xml:"measType"`
+	MeAsValue measValue `xml:"measValue"`
+}
+
+type job struct {
+	Key   string `xml:"jobId,attr"`
 }
 
 type measType struct {
@@ -23,8 +27,12 @@ type measType struct {
 
 type measValue struct {
 	XMLName xml.Name `xml:"measValue"`
-	Key   string `xml:"p,attr"`
-	Value float32 `xml:",floatdata"`
+	Key   string `xml:"measObjLdn,attr"`
+	R[]   r     `xml:"r"`
+}
+
+type r struct {
+	Value  float32  `xml:"p,attr"`
 }
 
 func main() {
