@@ -7,6 +7,18 @@ import (
 	"os"
 )
 
+type measData struct{
+	XMLName    xml.Name   `xml:"measData"`
+	MeAsEntity 	measEntity	`xml:"measEntity"`
+	MeAsInfo[]	measInfo	`xml:"measInfo"`
+}
+
+type measEntity struct {
+	XMLName    xml.Name   `xml:"measEntity"`
+	Key     string   `xml:"localDn,attr"`
+	Key2    string   `xml:"swVersion,attr"`
+}
+
 type measInfo struct {
 	XMLName    xml.Name   `xml:"measInfo"`
 	MeAsInfoID string     `xml:"measInfoId,attr"`
@@ -19,6 +31,7 @@ type measInfo struct {
 
 type job struct {
 	XMLName xml.Name `xml:"job"`
+	//XMLAttr xml.Attr `xml:"jobId,attr"`
 	Key     string   `xml:"jobId,attr"`
 }
 
@@ -53,7 +66,7 @@ type r struct {
 
 func main() {
 	// xml 파일 오픈
-	fp, err := os.Open("/home/thkim/GolandProjects/project_210809/data_cut.xml")
+	fp, err := os.Open("/home/thkim/GolandProjects/project_210810/data_cut_2.xml")
 	if err != nil {
 		panic(err)
 	}
@@ -63,11 +76,11 @@ func main() {
 	data, err := ioutil.ReadAll(fp)
 
 	// xml 디코딩
-	var measInfo measInfo
-	err = xml.Unmarshal(data, &measInfo)
+	var measData measData
+	err = xml.Unmarshal(data, &measData)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(measInfo)
+	fmt.Println(measData)
 }
 
