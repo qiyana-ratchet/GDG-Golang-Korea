@@ -1,7 +1,7 @@
 <measInfo measInfoId="DRB">
     <job jobId="2"/>
-<!--    <granPeriod duration="PT900S" endTime="2021-01-11T12:00:00+09:00"/>
-    <repPeriod duration="PT900S"/>-->
+    <granPeriod duration="PT900S" endTime="2021-01-11T12:00:00+09:00"/>
+    <repPeriod duration="PT900S"/>
     <measType p="1">DRB.AirIfDelayDl</measType>
     <measType p="2">DRB.AirIfDelayDl.1</measType>
     <measType p="3">DRB.AirIfDelayDl.2</measType>

@@ -8,32 +8,47 @@ import (
 )
 
 type measInfo struct {
-	XMLName xml.Name `xml:"measInfo"`
-	Job     job   `xml:"job"`
-/*	GranPeriod string `xml:"granPeriod,attr,attr"`
-	RepPeriod string `xml:"repPeriod,attr"`*/
-	MeAsType[] measType `xml:"measType"`
-	MeAsValue measValue `xml:"measValue"`
+	XMLName    xml.Name   `xml:"measInfo"`
+	MeAsInfoID string     `xml:"measInfoId,attr"`
+	Job        job        `xml:"job"`
+	GranPeriod granPeriod `xml:"granPeriod"`
+	RepPeriod  repPeriod  `xml:"repPeriod"`
+	MeAsType   []measType `xml:"measType"`
+	MeAsValue  measValue  `xml:"measValue"`
 }
 
 type job struct {
-	Key   string `xml:"jobId,attr"`
+	XMLName xml.Name `xml:"job"`
+	Key     string   `xml:"jobId,attr"`
+}
+
+type granPeriod struct {
+	XMLName xml.Name `xml:"granPeriod"`
+	Key     string   `xml:"duration,attr"`
+	Key2    string   `xml:"endTime,attr"`
+}
+
+type repPeriod struct {
+	XMLName xml.Name `xml:"repPeriod"`
+	Key     string   `xml:"duration,attr"`
 }
 
 type measType struct {
-	Key   string `xml:"p,attr"`
-	Value string `xml:",chardata"`
+	XMLName xml.Name `xml:"measType"`
+	Key     string   `xml:"p,attr"`
+	Value   string   `xml:",chardata"`
 }
 
 type measValue struct {
 	XMLName xml.Name `xml:"measValue"`
-	Key   string `xml:"measObjLdn,attr"`
-	R[]   r     `xml:"r"`
+	Key     string   `xml:"measObjLdn,attr"`
+	R       []r      `xml:"r"`
 }
 
 type r struct {
-	Key  string  `xml:"p,attr"`
-	Value string `xml:",chardata"`
+	XMLName xml.Name `xml:"r"`
+	Key     string   `xml:"p,attr"`
+	Value   string   `xml:",chardata"`
 }
 
 func main() {
@@ -48,11 +63,11 @@ func main() {
 	data, err := ioutil.ReadAll(fp)
 
 	// xml 디코딩
-	var pmInfo measInfo
-	err = xml.Unmarshal(data, &pmInfo)
+	var measInfo measInfo
+	err = xml.Unmarshal(data, &measInfo)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(pmInfo)
+	fmt.Println(measInfo)
 }
 
