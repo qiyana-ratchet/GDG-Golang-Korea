@@ -22,7 +22,7 @@ type job struct {
 	Key     string   `xml:"jobId,attr"`
 }
 
-type granPeriod struct {
+type granPeriod struct { 
 	XMLName xml.Name `xml:"granPeriod"`
 	Key     string   `xml:"duration,attr"`
 	Key2    string   `xml:"endTime,attr"`
