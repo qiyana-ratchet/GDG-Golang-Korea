@@ -7,14 +7,31 @@ import (
 	"os"
 )
 
-type measData struct{
+type measDataFile struct {
+	XMLName    xml.Name   `xml:"measDataFile"`
+	FileHeader fileHeader `xml:"fileHeader"`
+	measData   measData   `xml:"measData"`
+	FileFooter fileFooter `xml:"fileFooter"`
+}
+
+type fileHeader struct {
+	XMLName    xml.Name   `xml:"fileHeader"`
+	
+}
+
+type fileFooter struct {
+	XMLName    xml.Name   `xml:"fileFooter"`
+
+}
+
+type measData struct {
 	XMLName    xml.Name   `xml:"measData"`
-	MeAsEntity 	measEntity	`xml:"measEntity"`
-	MeAsInfo[]	measInfo	`xml:"measInfo"`
+	MeAsEntity measEntity `xml:"measEntity"`
+	MeAsInfo   []measInfo `xml:"measInfo"`
 }
 
 type measEntity struct {
-	XMLName    xml.Name   `xml:"measEntity"`
+	XMLName xml.Name `xml:"measEntity"`
 	Key     string   `xml:"localDn,attr"`
 	Key2    string   `xml:"swVersion,attr"`
 }
@@ -32,7 +49,7 @@ type measInfo struct {
 type job struct {
 	XMLName xml.Name `xml:"job"`
 	//XMLAttr xml.Attr `xml:"jobId,attr"`
-	Key     string   `xml:"jobId,attr"`
+	Key string `xml:"jobId,attr"`
 }
 
 type granPeriod struct {
@@ -83,4 +100,3 @@ func main() {
 	}
 	fmt.Println(measData)
 }
-
