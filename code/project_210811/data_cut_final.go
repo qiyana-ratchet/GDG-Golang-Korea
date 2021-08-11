@@ -8,7 +8,7 @@ import (
 )
 
 type measDataFile struct {
-	XMLName1    xml.Name   `xml:"measDataFile"`
+	XMLName    xml.Name   `xml:"measDataFile"`
 	XMLns    string   `xml:"xmlns,attr"`
 	FileHeader fileHeader `xml:"fileHeader"`
 	MeasData   measData   `xml:"measData"`
