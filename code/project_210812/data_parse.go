@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 type measDataFile struct {
@@ -111,10 +112,27 @@ func main(){
 	if err != nil {
 		panic(err)
 	}
-	ch := make(chan string)
-	ch<- measDataFile.MeasData.MeasInfo[0].MeasType[0].Value
 	//fmt.Println(ch)
-	fmt.Println(measDataFile.XMLName)
-	
+	printMeastype(measDataFile)
 }
 
+func printMeastype(measDataFile measDataFile){
+	measInfoList :=measDataFile.MeasData.MeasInfo
+	measInfoListLen :=len(measInfoList)
+	for i:=0;i< measInfoListLen;i++{
+		measTypeList :=measDataFile.MeasData.MeasInfo[i].MeasType
+		measTypeListLen :=len(measTypeList)
+		//fmt.Println(measInfoListLen, measTypeListLen)
+		//메트릭 개수 디버깅용
+		for j:=0;j< measTypeListLen;j++ {
+			metricKey := strings.ToLower(strings.ReplaceAll(measTypeList[j].Value,".","_"))
+			metricValue := measInfoList[i].MeasValue.R[j].Value
+			printMetricInfo(metricKey)
+			fmt.Println(metricKey, metricValue)
+		}
+	}
+}
+func printMetricInfo(metricName string){
+	fmt.Println("# HELP",metricName,"This is sample info.")
+	fmt.Println("# TYPE",metricName,"typeName")
+}
