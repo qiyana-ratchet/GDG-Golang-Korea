@@ -9,7 +9,7 @@ import (
 
 type measInfo struct {
 	XMLName    xml.Name   `xml:"measInfo"`
-	MeAsInfoID string     `xml:"measInfoId,attr"`
+	MeasInfoID string     `xml:"measInfoId,attr"`
 	Job        job        `xml:"job"`
 	GranPeriod granPeriod `xml:"granPeriod"`
 	RepPeriod  repPeriod  `xml:"repPeriod"`

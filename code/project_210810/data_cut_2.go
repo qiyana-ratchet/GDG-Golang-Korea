@@ -7,27 +7,12 @@ import (
 	"os"
 )
 
-type measDataFile struct {
-	XMLName    xml.Name   `xml:"measDataFile"`
-	FileHeader fileHeader `xml:"fileHeader"`
-	measData   measData   `xml:"measData"`
-	FileFooter fileFooter `xml:"fileFooter"`
-}
-
-type fileHeader struct {
-	XMLName    xml.Name   `xml:"fileHeader"`
-	
-}
-
-type fileFooter struct {
-	XMLName    xml.Name   `xml:"fileFooter"`
-
-}
-
 type measData struct {
 	XMLName    xml.Name   `xml:"measData"`
 	MeAsEntity measEntity `xml:"measEntity"`
 	MeAsInfo   []measInfo `xml:"measInfo"`
+	BeginTime string `xml:"beginTime,attr"`
+	EndTime string `xml:"endTime,attr"`
 }
 
 type measEntity struct {
@@ -45,6 +30,27 @@ type measInfo struct {
 	MeAsType   []measType `xml:"measType"`
 	MeAsValue  measValue  `xml:"measValue"`
 }
+//type measData struct {
+//	XMLName    xml.Name   `xml:"measData"`
+//	MeAsEntity measEntity `xml:"measEntity"`
+//	MeAsInfo   []measInfo `xml:"measInfo"`
+//}
+//
+//type measEntity struct {
+//	XMLName xml.Name `xml:"measEntity"`
+//	Key     string   `xml:"localDn,attr"`
+//	Key2    string   `xml:"swVersion,attr"`
+//}
+//
+//type measInfo struct {
+//	XMLName    xml.Name   `xml:"measInfo"`
+//	MeAsInfoID string     `xml:"measInfoId,attr"`
+//	Job        job        `xml:"job"`
+//	GranPeriod granPeriod `xml:"granPeriod"`
+//	RepPeriod  repPeriod  `xml:"repPeriod"`
+//	MeAsType   []measType `xml:"measType"`
+//	MeAsValue  measValue  `xml:"measValue"`
+//}
 
 type job struct {
 	XMLName xml.Name `xml:"job"`

@@ -9,7 +9,6 @@ import (
 
 type measDataFile struct {
 	XMLName    xml.Name   `xml:"measDataFile"`
-	XMLns    string   `xml:"xmlns,attr"`
 	FileHeader fileHeader `xml:"fileHeader"`
 	MeasData   measData   `xml:"measData"`
 	FileFooter fileFooter `xml:"fileFooter"`
