@@ -1,4 +1,4 @@
-package main
+package collector
 
 import (
 	"encoding/xml"
@@ -8,14 +8,12 @@ import (
 	"strings"
 )
 
-//xml 태그 구조화
 type measDataFile struct {
 	XMLName    xml.Name   `xml:"measDataFile"`
 	FileHeader fileHeader `xml:"fileHeader"`
 	MeasData   measData   `xml:"measData"`
 	FileFooter fileFooter `xml:"fileFooter"`
 }
-
 type fileHeader struct {
 	XMLName           xml.Name   `xml:"fileHeader"`
 	FileFormatVersion string     `xml:"fileFormatVersion,attr"`
@@ -24,18 +22,15 @@ type fileHeader struct {
 	FileSender        fileSender `xml:"fileSender"`
 	MeasData          measData   `xml:"measData"`
 }
-
 type fileSender struct {
 	XMLName    xml.Name `xml:"fileSender"`
 	SenderName string   `xml:"senderName,attr"`
 	SenderType string   `xml:"senderType,attr"`
 }
-
 type fileFooter struct {
 	XMLName  xml.Name `xml:"fileFooter"`
 	MeasData measData `xml:"measData"`
 }
-
 type measData struct {
 	XMLName    xml.Name   `xml:"measData"`
 	MeasEntity measEntity `xml:"measEntity"`
@@ -43,13 +38,11 @@ type measData struct {
 	BeginTime  string     `xml:"beginTime,attr"`
 	EndTime    string     `xml:"endTime,attr"`
 }
-
 type measEntity struct {
 	XMLName xml.Name `xml:"measEntity"`
 	Key     string   `xml:"localDn,attr"`
 	Key2    string   `xml:"swVersion,attr"`
 }
-
 type measInfo struct {
 	XMLName    xml.Name   `xml:"measInfo"`
 	MeasInfoID string     `xml:"measInfoId,attr"`
@@ -59,46 +52,47 @@ type measInfo struct {
 	MeasType   []measType `xml:"measType"`
 	MeasValue  measValue  `xml:"measValue"`
 }
-
 type job struct {
 	XMLName xml.Name `xml:"job"`
 	//XMLAttr xml.Attr `xml:"jobId,attr"`
 	Key string `xml:"jobId,attr"`
 }
-
 type granPeriod struct {
 	XMLName xml.Name `xml:"granPeriod"`
 	Key     string   `xml:"duration,attr"`
 	Key2    string   `xml:"endTime,attr"`
 }
-
 type repPeriod struct {
 	XMLName xml.Name `xml:"repPeriod"`
 	Key     string   `xml:"duration,attr"`
 }
-
 type measType struct {
 	XMLName xml.Name `xml:"measType"`
 	Key     string   `xml:"p,attr"`
 	Value   string   `xml:",chardata"`
 }
-
 type measValue struct {
 	XMLName xml.Name `xml:"measValue"`
 	Key     string   `xml:"measObjLdn,attr"`
 	R       []r      `xml:"r"`
 }
-
 type r struct {
 	XMLName xml.Name `xml:"r"`
 	Key     string   `xml:"p,attr"`
 	Value   string   `xml:",chardata"`
 }
 
-//main
-func main() {
+
+func getPmData() (pmdata, error) {
+	//var utsname unix.Utsname
+	//if err := unix.Uname(&utsname); err != nil {
+	//	return pmdata{}, err
+	//}
+
+
+	///////////////////
 	// xml 파일 오픈
-	fp, err := os.Open("/home/thkim/GolandProjects/project_210812/data_parse.xml")
+	fp, err := os.Open("/home/thkim/myhfrlab/test-node-exporter/collector/data_parse.xml")
 	if err != nil {
 		panic(err)
 	}
@@ -114,8 +108,22 @@ func main() {
 		panic(err)
 	}
 	//fmt.Println(ch)
-	printMeastype(measDataFile)
+	//printMeastype(measDataFile)
+	///////////////////
+
+
+	output := pmdata{
+		SysName:    measDataFile.MeasData.MeasInfo[0].MeasInfoID,
+		Release:    measDataFile.MeasData.MeasInfo[0].MeasInfoID,
+		Version:    measDataFile.MeasData.MeasInfo[0].MeasInfoID,
+		Machine:    measDataFile.MeasData.MeasInfo[0].MeasInfoID,
+		NodeName:   measDataFile.MeasData.MeasInfo[0].MeasInfoID,
+		DomainName: measDataFile.MeasData.MeasInfo[0].MeasInfoID,
+	}
+
+	return output, nil
 }
+
 
 //메트릭 프린트 함수
 func printMeastype(measDataFile measDataFile) {
@@ -137,6 +145,7 @@ func printMeastype(measDataFile measDataFile) {
 		}
 	}
 }
+
 
 //HELP 출력
 func printMetricInfo(metricKey string) {
