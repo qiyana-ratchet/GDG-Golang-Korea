@@ -2,10 +2,12 @@ package collector
 
 import (
 	"encoding/xml"
+	"fmt"
 	"github.com/go-kit/log"
 	"github.com/prometheus/client_golang/prometheus"
 	"io/ioutil"
 	"os"
+	"strings"
 )
 
 var pmDesc = prometheus.NewDesc(
@@ -127,6 +129,24 @@ func (c *pmCollector) Update(ch chan<- prometheus.Metric) error {
 	ch <- prometheus.MustNewConstMetric(pmDesc, prometheus.GaugeValue, measDataFile.MeasData.MeasInfo[0].MeasValue.R[0].Value,
 		measDataFile.FileFooter.XMLName.Local,
 	)
+/////////////////////////////////////////
+	measInfoList := measDataFile.MeasData.MeasInfo
+	measInfoListLen := len(measInfoList)
 
+	for i := 0; i < measInfoListLen; i++ {
+		measTypeList := measDataFile.MeasData.MeasInfo[i].MeasType
+		measInfoIdValue := measDataFile.MeasData.MeasInfo[i].MeasInfoID
+		measTypeListLen := len(measTypeList)
+		//fmt.Println(measInfoListLen, measTypeListLen)
+		//메트릭 개수 디버깅용
+
+		for j := 0; j < measTypeListLen; j++ {
+			metricKey := strings.ToLower(strings.ReplaceAll(measTypeList[j].Value, ".", "_"))
+			metricValue := measInfoList[i].MeasValue.R[j].Value
+			printMetricInfo(metricKey)
+			fmt.Println(metricKey+"{measInfoID=\""/*+measInfoIdName+*/+ measInfoIdValue+"\"}", metricValue)
+		}
+	}
+/////////////////////////////////////////
 	return nil
 }
