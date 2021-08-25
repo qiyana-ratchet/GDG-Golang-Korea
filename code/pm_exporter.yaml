@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testlog
+spec:
+  containers:
+  - name: pm-exporter
+    image: thkim1/pm_exporter_image_new:dev
+    command: ["sleep"]
+    args: ["10000"]
+    #command: ["pm-exporter"]
+    ports:
+    - containerPort: 9100
+    imagePullPolicy: Always
+
+  tolerations:
+  - key: "node-role.kubernetes.io/master"
+    operator: "Exists"
+    effect: "NoSchedule"
+
