@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: pm-exporter
-    image: thkim1/pm_exporter_image_new:dev
+    image: thkim1/pm_exporter_image_new_update:dev
     command: ["sleep"]
     args: ["10000"]
     #command: ["pm-exporter"]

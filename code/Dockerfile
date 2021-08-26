@@ -2,7 +2,11 @@
 FROM golang:latest
 
 ADD pm-exporter /bin/
-ADD please_parse_this.xml .
+ADD collector/parse_this_1.xml .
+ADD collector/parse_this_2.xml .
+ADD collector/parse_this_3.xml .
+ADD collector/parse_this_4.xml .
+ADD collector/parse_this_5.xml .
 
 WORKDIR /app
 #WORKDIR /collector
