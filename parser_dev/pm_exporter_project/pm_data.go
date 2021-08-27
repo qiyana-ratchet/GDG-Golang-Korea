@@ -22,6 +22,7 @@ var pmDesc = prometheus.NewDesc(
 type pmCollector struct {
 	logger   log.Logger
 }
+
 type pmdata struct {
 	SysName    string
 	Release    string
