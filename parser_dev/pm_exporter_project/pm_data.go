@@ -7,7 +7,7 @@ import (
 
 var pmDesc = prometheus.NewDesc(
 	prometheus.BuildFQName(namespace, "pm", "data"),
-	"THIS IS PROMETHEUS EXAMPLE FROM TAEHYUN KIM",
+	"THIS IS SAMPLE METRICS",
 	[]string{
 		"sysname",
 		"release",
