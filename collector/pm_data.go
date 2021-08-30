@@ -13,7 +13,7 @@ import (
 
 var pmDesc = prometheus.NewDesc(
 	prometheus.BuildFQName(namespace, "pm", "data"),
-	"THIS IS SAMPLE TEST FOR PROMETHEUS METRICS BY TAEHYUN KIM",
+	"THIS IS DESCRIPTION TEXT FOR PROMETHEUS METRICS",
 	[]string{
 		"SAMPLETEST1",
 	},
