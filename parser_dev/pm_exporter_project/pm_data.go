@@ -15,7 +15,6 @@ var pmDesc = prometheus.NewDesc(
 		"machine",
 		"nodename",
 		"domainname",
-		//라벨 이름은 영문이어야 합니다 (혹은 영문+숫자) <-김태현
 	},
 	nil,
 )
