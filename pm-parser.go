@@ -12,10 +12,9 @@ import (
 
 var pmDesc = prometheus.NewDesc(
 	prometheus.BuildFQName(namespace, "pm", "data"),
-	"THIS IS SAMPLE TEST FOR PROMETHEUS METRICS BY TAEHYUN KIM",
+	"THIS IS DESCRIPTION TEXT FOR PROMETHEUS METRICS",
 	[]string{
-		"SAMPLETEST1",
-		//라벨 이름은 영문입니다
+		"SAMPLETEXT1",
 	},
 	nil,
 )
