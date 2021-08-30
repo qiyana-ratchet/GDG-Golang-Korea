@@ -15,7 +15,7 @@ var pmDesc = prometheus.NewDesc(
 	"THIS IS SAMPLE TEST FOR PROMETHEUS METRICS BY TAEHYUN KIM",
 	[]string{
 		"SAMPLETEST1",
-		//라벨 이름은 영문이어야 합니다 (혹은 영문+숫자) -김태현
+		//라벨 이름은 영문입니다
 	},
 	nil,
 )
