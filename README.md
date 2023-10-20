@@ -54,7 +54,8 @@ Helm 명령어로 설치합니다
 ```sh
 helm install prometheus my_prometheus/
 ```
-![Screenshot_from_2021-08-26_15-14-06](/uploads/c09a5c92b0ed37fd4682ddd274133a1b/Screenshot_from_2021-08-26_15-14-06.png)
+![image](https://github.com/qiyana-ratchet/pm-exporter/assets/81336710/7f49a1f3-5ada-4f13-8b80-e0816f159399)
+
 
 ## Grafana
 - Grafana를 이용해 시각화된 여러 메트릭 그래프를 동시에 모니터링 할 수 있습니다.  
@@ -62,4 +63,5 @@ helm install prometheus my_prometheus/
 ~~대시보드 Import ID는 14931 입니다~~
 
 
-![Screenshot_from_2021-08-26_15-11-46](/uploads/c3ba66ec8cd47034187570e5bba04994/Screenshot_from_2021-08-26_15-11-46.png)
+![image](https://github.com/qiyana-ratchet/pm-exporter/assets/81336710/7fb27097-4957-4652-b4b8-06d9a896a2d4)
+
